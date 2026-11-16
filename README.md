@@ -170,6 +170,7 @@ Nobody can load the site without approval. `netlify/edge-functions/access.js` ru
 - **Tracing.** Every page is stamped with the approved person's name: a small label in the corner and a comment in the page source. Set `WATERMARK = false` in `access.js` to hide the label.
 - **Revoking** takes effect within 10 minutes (`SESSION_SECONDS`).
 - **Settings.** The site needs the environment variables `ACCESS_ADMIN_KEY` and `ACCESS_SECRET`. Requests are stored in Netlify Blobs (store `access`).
+- **Vercel copy.** `middleware.js` is the same gate for a Vercel deployment of this repo (`vercel.json` holds its settings, `.vercelignore` keeps the README and tools out). It keeps no list of its own: it checks sessions itself and passes `/_access/*` through to the Netlify site, so one admin page covers both addresses. It needs the environment variable `GATE_PROXY_KEY` on the Vercel project, with the same value as on Netlify (kept in `VERCEL-GATE-KEY.txt`, never published). Without it the Vercel site answers 503 to everything.
 - **Limit.** An approved visitor's browser still downloads the page, so they can save it. The gate controls who gets in and records who it was; it can't stop an approved person copying.
 
 - **Search engines.** The site is kept out of them three ways: a `noindex` meta tag, an `X-Robots-Tag` header in `_headers`, and `robots.txt`. That way it never competes with aspenhomesoftx.com.

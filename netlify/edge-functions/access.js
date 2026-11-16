@@ -8,6 +8,7 @@
 // Requests are kept in Netlify Blobs (store "access"). Needs two environment variables on the site:
 //   ACCESS_ADMIN_KEY  the password for /_access/admin
 //   ACCESS_SECRET     signs the session cookie
+//   GATE_PROXY_KEY    (optional) the key shared with the Vercel copy of the site, see middleware.js
 import { getStore } from '@netlify/blobs';
 
 export const config = { path: '/*' };
@@ -31,8 +32,8 @@ const rand = (n) => b64u(crypto.getRandomValues(new Uint8Array(n)));
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const clip = (v, n) => (typeof v === 'string' ? v.replace(/[\u0000-\u001f\u007f]/g, ' ').trim().slice(0, n) : '');
 
-async function sign(text) {
-  const key = await crypto.subtle.importKey('raw', enc.encode(env('ACCESS_SECRET')), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+async function sign(text, secret = env('ACCESS_SECRET')) {
+  const key = await crypto.subtle.importKey('raw', enc.encode(secret), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
   return b64u(await crypto.subtle.sign('HMAC', key, enc.encode(text)));
 }
 function same(a, b) {
@@ -62,9 +63,9 @@ const html = (body, status = 200) => new Response(body, {
 
 // ---- sessions -------------------------------------------------------------------------------
 
-async function makeSession(rec) {
+async function makeSession(rec, secret) {
   const body = b64u(enc.encode(JSON.stringify({ id: rec.id, n: rec.name, exp: now() + SESSION_SECONDS * 1000 })));
-  return `${body}.${await sign(body)}`;
+  return `${body}.${await sign(body, secret)}`;
 }
 async function readSession(value) {
   if (!value) return null;
@@ -93,9 +94,15 @@ async function recordFromCookie(value) {
 }
 
 // The Vercel copy of the site (middleware.js) sends its /_access/ calls here, so both addresses share one
-// list of approvals. It proves itself with a signed header; only then are the visitor details it passes on trusted.
+// list of approvals. It has its own key (GATE_PROXY_KEY, set on both sites) and proves itself with a header signed
+// with it; only then are the visitor details it passes on trusted. Its sessions are signed with that key too, so
+// the main signing secret never leaves Netlify.
+async function viaProxy(req) {
+  const key = env('GATE_PROXY_KEY');
+  return !!key && same(req.headers.get('x-gate-proxy') || '', await sign('proxy', key));
+}
 async function visitor(req, context) {
-  if (same(req.headers.get('x-gate-proxy') || '', await sign('proxy'))) {
+  if (await viaProxy(req)) {
     return { ip: clip(req.headers.get('x-gate-ip') || '', 60), country: clip(req.headers.get('x-gate-country') || '', 60), city: clip(req.headers.get('x-gate-city') || '', 80) };
   }
   return { ip: context.ip || '', country: (context.geo && context.geo.country && context.geo.country.name) || '', city: (context.geo && context.geo.city) || '' };
@@ -174,7 +181,8 @@ async function api(req, url, context) {
       rec.lastSeen = now();
       context.waitUntil(store().setJSON(`req/${rec.id}`, rec).catch(() => {}));
     }
-    return json({ state }, 200, { 'set-cookie': cookie('aa_s', await makeSession(rec), SESSION_SECONDS) });
+    const secret = (await viaProxy(req)) ? env('GATE_PROXY_KEY') : undefined;
+    return json({ state }, 200, { 'set-cookie': cookie('aa_s', await makeSession(rec, secret), SESSION_SECONDS) });
   }
 
   // the "Request access" page itself, for the Vercel copy to show

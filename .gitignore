@@ -8,3 +8,4 @@ ACCESS-ADMIN-KEY.txt
 .env.*
 __pycache__/
 *.pyc
+VERCEL-GATE-KEY.txt

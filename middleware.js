@@ -5,7 +5,7 @@
 // signed session cookie itself and passes everything under /_access/ (request form, status, admin page)
 // through to Netlify, so one admin page covers both addresses.
 //
-// Needs the environment variable ACCESS_SECRET on the Vercel project, with the same value as on Netlify.
+// Needs the environment variable GATE_PROXY_KEY on the Vercel project, with the same value as on Netlify.
 
 const GATE_ORIGIN = 'https://aspen-homes-concept.netlify.app';
 const OWNER = 'Design Dervish';
@@ -19,7 +19,7 @@ const unb64u = (s) => Uint8Array.from(atob(s.replace(/-/g, '+').replace(/_/g, '/
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
 async function sign(text) {
-  const key = await crypto.subtle.importKey('raw', enc.encode(process.env.ACCESS_SECRET), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+  const key = await crypto.subtle.importKey('raw', enc.encode(process.env.GATE_PROXY_KEY), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
   return b64u(await crypto.subtle.sign('HMAC', key, enc.encode(text)));
 }
 function same(a, b) {
@@ -81,7 +81,7 @@ export default async function middleware(req) {
   const url = new URL(req.url);
   const path = url.pathname;
 
-  if (!process.env.ACCESS_SECRET) return deny('Access gate is not configured.', 503);
+  if (!process.env.GATE_PROXY_KEY) return deny('Access gate is not configured.', 503);
   if (PUBLIC.has(path)) return pass();
   // this middleware fetching a page for itself (see below)
   if (same(req.headers.get('x-gate-internal') || '', await sign('internal'))) return pass();

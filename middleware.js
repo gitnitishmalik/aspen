@@ -11,7 +11,7 @@ const GATE_ORIGIN = 'https://aspen-homes-concept.netlify.app';
 const OWNER = 'Design Dervish';
 const WATERMARK = true;                  // small "Private preview for <name>" label on every page
 const SESSION_SECONDS = 600;
-const PUBLIC = new Set(['/robots.txt', '/img/og.jpg', '/img/logo-mark.webp']);
+const PUBLIC = new Set(['/robots.txt', '/img/og.jpg', '/img/logo-mark.webp', '/img/gate-preview.webp']);
 
 const enc = new TextEncoder();
 const b64u = (bytes) => btoa(String.fromCharCode(...new Uint8Array(bytes))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');

@@ -19,7 +19,7 @@ const DEFAULT_DAYS = 7;                  // how long an approval lasts unless th
 const SESSION_SECONDS = 600;             // approvals are re-checked this often, so a revoke bites within 10 minutes
 const MAX_PENDING_PER_IP = 3;
 const MAX_RECORDS = 500;
-const PUBLIC = new Set(['/robots.txt', '/img/og.jpg', '/img/logo-mark.webp']);   // link preview picture and tab icon
+const PUBLIC = new Set(['/robots.txt', '/img/og.jpg', '/img/logo-mark.webp', '/img/gate-preview.webp']);   // link preview picture and tab icon
 
 const enc = new TextEncoder();
 const env = (k) => Netlify.env.get(k) || '';
@@ -303,8 +303,8 @@ const GATE = `<!doctype html>
 <meta property="og:title" content="Private preview"><meta property="og:description" content="This website concept is shared by invitation. Request access to view it.">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600&display=swap">
 <style>${BASE_CSS}
-body{display:grid;place-items:center;padding:24px 16px;background:radial-gradient(1200px 600px at 50% -10%,#0a1b3d 0,#000b22 60%)}
-main{width:100%;max-width:460px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:22px;padding:clamp(24px,5vw,38px)}
+body{display:grid;place-items:center;padding:24px 16px;background:linear-gradient(rgba(0,11,34,.5),rgba(0,11,34,.72)),#000b22 url(/img/gate-preview.webp) center/cover no-repeat fixed}
+main{width:100%;max-width:460px;background:rgba(0,14,40,.8);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 30px 80px rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.12);border-radius:22px;padding:clamp(24px,5vw,38px)}
 .lock{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:rgba(201,169,110,.14);margin-bottom:18px}
 .row{display:grid;gap:0 12px;grid-template-columns:1fr 1fr}@media(max-width:480px){.row{grid-template-columns:1fr}}
 form button{width:100%;margin-top:20px}

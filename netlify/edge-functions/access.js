@@ -301,7 +301,7 @@ const GATE = `<!doctype html>
 <title>Private preview</title>
 <link rel="icon" href="/img/logo-mark.webp">
 <meta property="og:title" content="Private preview"><meta property="og:description" content="This website concept is shared by invitation. Request access to view it.">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600&display=swap">
 <style>${BASE_CSS}
 .hero{position:fixed;inset:0;z-index:0;cursor:pointer;background:#000b22}
 .hero img{display:block;width:100%;height:100%;object-fit:cover;object-position:center top}
@@ -309,35 +309,53 @@ const GATE = `<!doctype html>
 .cue:hover{background:rgba(0,11,34,.92)}.cue svg{animation:nudge 1.6s ease-in-out infinite}@keyframes nudge{50%{transform:translateY(4px)}}
 .cue.off{opacity:0;pointer-events:none}
 .gap{height:100vh;height:100svh}
-.sheet{position:relative;z-index:2;min-height:100vh;min-height:100svh;display:grid;place-items:center;padding:24px 16px;background:rgba(0,11,34,.975);border-top:1px solid rgba(255,255,255,.14);box-shadow:0 -30px 80px rgba(0,0,0,.5)}
-main{width:100%;max-width:460px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:22px;padding:clamp(24px,5vw,38px)}
-.lock{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:rgba(201,169,110,.14);margin-bottom:18px}
+.sheet{position:relative;z-index:2;min-height:100vh;min-height:100svh;display:grid;align-content:center;justify-items:center;gap:clamp(26px,5vh,44px);padding:clamp(48px,9vh,96px) 16px;background:rgba(0,11,34,.975);border-top:1px solid rgba(255,255,255,.14);box-shadow:0 -30px 80px rgba(0,0,0,.5)}
+.pitch{text-align:center;max-width:640px}.pitch h1{font-size:clamp(36px,7vw,62px);margin-bottom:14px}.pitch p{font-size:clamp(16px,2.2vw,18px);margin:0}
+main{width:100%;max-width:500px;background:#f6f1e6;color:#001233;border-radius:6px;padding:9px;box-shadow:0 40px 90px rgba(0,0,0,.55)}
+.frame{border:1px solid #c9a96e;outline:1px solid rgba(201,169,110,.5);outline-offset:-6px;padding:clamp(30px,6vw,46px) clamp(22px,5vw,42px) clamp(24px,5vw,34px);text-align:center}
+.kicker{font-size:11.5px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:#7a5f2a;margin:0 -.32em 0 0}
+.rule{display:flex;align-items:center;gap:12px;max-width:210px;margin:14px auto 18px}.rule::before,.rule::after{content:'';flex:1;height:1px;background:#c9a96e}.rule i{width:6px;height:6px;background:#c9a96e;transform:rotate(45deg)}
+main h1{font:400 clamp(32px,6.4vw,44px)/1.06 'Instrument Serif',Georgia,serif;letter-spacing:0;color:#001233;margin:0 0 10px}main h1 em{color:#7a5f2a;font-style:italic}
+main p{color:rgba(0,18,51,.74)}
+main form{text-align:left;margin-top:20px}
+main label{font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(0,18,51,.68);margin:18px 0 2px}main label span{text-transform:none;letter-spacing:0;font-weight:400}
+main input,main textarea{color:#001233;background:transparent;border:0;border-bottom:1px solid rgba(0,18,51,.32);border-radius:0;padding:8px 2px}
+main input:focus,main textarea:focus{border-color:#7a5f2a;box-shadow:0 1px 0 #7a5f2a}
+main button{background:#001233;color:#f6f1e6;letter-spacing:.03em}main button:hover{background:#0f2552}main button:focus-visible{outline-color:#7a5f2a}
+main .err{color:#a3271a}
+.lock{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:#001233;box-shadow:0 0 0 3px #f6f1e6,0 0 0 4px #c9a96e;margin:0 auto 16px}
 .row{display:grid;gap:0 12px;grid-template-columns:1fr 1fr}@media(max-width:480px){.row{grid-template-columns:1fr}}
-form button{width:100%;margin-top:20px}
-.foot{font-size:12.5px;color:rgba(243,239,230,.5);margin:22px 0 0;text-align:center}
+form button{width:100%;margin-top:26px}
+.foot{font-size:12.5px;color:rgba(0,18,51,.55);margin:24px 0 0;text-align:center}
 .dots::after{content:'';animation:d 1.4s steps(4) infinite}@keyframes d{0%{content:''}25%{content:'.'}50%{content:'..'}75%{content:'...'}}
 @media(prefers-reduced-motion:reduce){.dots::after{animation:none;content:'...'}.cue svg{animation:none}}
 [hidden]{display:none!important}
 </style></head><body>
 <div class="hero" id="hero"><picture><source media="(max-width:700px) and (orientation:portrait)" srcset="/img/gate-hero-m.webp"><source media="(orientation:portrait)" srcset="/img/gate-hero-t.webp"><source media="(min-aspect-ratio:19/10)" srcset="/img/gate-hero-w.webp"><source media="(max-aspect-ratio:33/20)" srcset="/img/gate-hero-s.webp"><img src="/img/gate-hero.webp" width="1920" height="1080" alt="Preview of the home page of this website concept" draggable="false"></picture></div>
-<button class="cue" id="cue" type="button">Scroll down to request access <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></button>
+<button class="cue" id="cue" type="button">Want the full preview? <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></button>
 <div class="gap"></div>
 <div class="sheet" id="sheet">
-<main>
-  <div class="lock" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e4cf9f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10.5" width="16" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg></div>
+<div class="pitch">
   <span class="tag">Private preview</span>
+  <h1>Want the <em>full preview?</em></h1>
+  <p>That was the first screen. The complete concept, with every page and the scroll-to-build animation, is shared by invitation only.</p>
+</div>
+<main><div class="frame">
+  <div class="lock" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e4cf9f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10.5" width="16" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg></div>
+  <p class="kicker">Invitation</p>
+  <div class="rule" aria-hidden="true"><i></i></div>
 
   <section id="ask" hidden>
-    <h1>This concept is shared <em>by invitation</em></h1>
-    <p>Tell us who you are and we'll open it for you. You'll be let in on this device as soon as your request is approved.</p>
+    <h1>Request your <em>invitation</em></h1>
+    <p>Tell us who you are. Once your request is approved, the full preview opens on this device.</p>
     <form id="f" novalidate>
       <div class="row">
         <div><label for="name">Your name</label><input id="name" name="name" autocomplete="name" maxlength="80" required></div>
         <div><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" maxlength="120" required></div>
       </div>
-      <label for="company">Company <span style="opacity:.6">(optional)</span></label><input id="company" name="company" autocomplete="organization" maxlength="120">
-      <label for="note">Why you'd like to see it <span style="opacity:.6">(optional)</span></label><textarea id="note" name="note" maxlength="400"></textarea>
-      <button id="go" type="submit">Request access</button>
+      <label for="company">Company <span>(optional)</span></label><input id="company" name="company" autocomplete="organization" maxlength="120">
+      <label for="note">Why you'd like to see it <span>(optional)</span></label><textarea id="note" name="note" maxlength="400"></textarea>
+      <button id="go" type="submit">Request my invitation</button>
       <p class="err" id="err" role="alert"></p>
     </form>
   </section>
@@ -353,7 +371,7 @@ form button{width:100%;margin-top:20px}
   </section>
 
   <p class="foot">This demo preview belongs to the owner who created it.</p>
-</main>
+</div></main>
 </div>
 <script>
 (function () {

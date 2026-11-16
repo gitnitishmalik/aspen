@@ -19,7 +19,7 @@ const DEFAULT_DAYS = 7;                  // how long an approval lasts unless th
 const SESSION_SECONDS = 600;             // approvals are re-checked this often, so a revoke bites within 10 minutes
 const MAX_PENDING_PER_IP = 3;
 const MAX_RECORDS = 500;
-const PUBLIC = new Set(['/robots.txt', '/img/og.jpg', '/img/logo-mark.webp', '/img/gate-preview.webp']);   // link preview picture and tab icon
+const PUBLIC = new Set(['/robots.txt', '/img/og.jpg', '/img/logo-mark.webp', '/img/gate-hero.webp', '/img/gate-hero-w.webp', '/img/gate-hero-s.webp', '/img/gate-hero-t.webp', '/img/gate-hero-m.webp']);   // link preview picture and tab icon
 
 const enc = new TextEncoder();
 const env = (k) => Netlify.env.get(k) || '';
@@ -303,16 +303,26 @@ const GATE = `<!doctype html>
 <meta property="og:title" content="Private preview"><meta property="og:description" content="This website concept is shared by invitation. Request access to view it.">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600&display=swap">
 <style>${BASE_CSS}
-body{display:grid;place-items:center;padding:24px 16px;background:linear-gradient(rgba(0,11,34,.5),rgba(0,11,34,.72)),#000b22 url(/img/gate-preview.webp) center/cover no-repeat fixed}
-main{width:100%;max-width:460px;background:rgba(0,14,40,.8);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 30px 80px rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.12);border-radius:22px;padding:clamp(24px,5vw,38px)}
+.hero{position:fixed;inset:0;z-index:0;cursor:pointer;background:#000b22}
+.hero img{display:block;width:100%;height:100%;object-fit:cover;object-position:center top}
+.cue{position:fixed;left:50%;bottom:max(22px,env(safe-area-inset-bottom));transform:translateX(-50%);z-index:1;display:flex;align-items:center;gap:10px;white-space:nowrap;padding:12px 18px;font-size:14px;color:#f3efe6;background:rgba(0,11,34,.78);border:1px solid rgba(255,255,255,.28);box-shadow:0 10px 30px rgba(0,0,0,.35);transition:opacity .25s}
+.cue:hover{background:rgba(0,11,34,.92)}.cue svg{animation:nudge 1.6s ease-in-out infinite}@keyframes nudge{50%{transform:translateY(4px)}}
+.cue.off{opacity:0;pointer-events:none}
+.gap{height:100vh;height:100svh}
+.sheet{position:relative;z-index:2;min-height:100vh;min-height:100svh;display:grid;place-items:center;padding:24px 16px;background:rgba(0,11,34,.975);border-top:1px solid rgba(255,255,255,.14);box-shadow:0 -30px 80px rgba(0,0,0,.5)}
+main{width:100%;max-width:460px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:22px;padding:clamp(24px,5vw,38px)}
 .lock{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:rgba(201,169,110,.14);margin-bottom:18px}
 .row{display:grid;gap:0 12px;grid-template-columns:1fr 1fr}@media(max-width:480px){.row{grid-template-columns:1fr}}
 form button{width:100%;margin-top:20px}
 .foot{font-size:12.5px;color:rgba(243,239,230,.5);margin:22px 0 0;text-align:center}
 .dots::after{content:'';animation:d 1.4s steps(4) infinite}@keyframes d{0%{content:''}25%{content:'.'}50%{content:'..'}75%{content:'...'}}
-@media(prefers-reduced-motion:reduce){.dots::after{animation:none;content:'...'}}
+@media(prefers-reduced-motion:reduce){.dots::after{animation:none;content:'...'}.cue svg{animation:none}}
 [hidden]{display:none!important}
 </style></head><body>
+<div class="hero" id="hero"><picture><source media="(max-width:700px) and (orientation:portrait)" srcset="/img/gate-hero-m.webp"><source media="(orientation:portrait)" srcset="/img/gate-hero-t.webp"><source media="(min-aspect-ratio:19/10)" srcset="/img/gate-hero-w.webp"><source media="(max-aspect-ratio:33/20)" srcset="/img/gate-hero-s.webp"><img src="/img/gate-hero.webp" width="1920" height="1080" alt="Preview of the home page of this website concept" draggable="false"></picture></div>
+<button class="cue" id="cue" type="button">Scroll down to request access <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></button>
+<div class="gap"></div>
+<div class="sheet" id="sheet">
 <main>
   <div class="lock" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e4cf9f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10.5" width="16" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg></div>
   <span class="tag">Private preview</span>
@@ -344,12 +354,18 @@ form button{width:100%;margin-top:20px}
 
   <p class="foot">This demo preview belongs to the owner who created it.</p>
 </main>
+</div>
 <script>
 (function () {
-  var $ = function (id) { return document.getElementById(id); }, timer;
+  var $ = function (id) { return document.getElementById(id); }, timer, first = true;
+  function down(smooth) { $('sheet').scrollIntoView({ behavior: smooth && !matchMedia('(prefers-reduced-motion: reduce)').matches ? 'smooth' : 'auto' }); }
+  $('hero').addEventListener('click', function () { down(true); }); $('cue').addEventListener('click', function () { down(true); });
+  addEventListener('scroll', function () { $('cue').classList.toggle('off', scrollY > 40); }, { passive: true });
   function show(id) { ['ask', 'wait', 'no'].forEach(function (s) { $(s).hidden = s !== id; }); }
   function apply(state) {
     if (state === 'approved') { location.reload(); return; }
+    if (first && state && state !== 'none') down(false);   // returning visitor: straight to their status
+    first = false;
     if (state === 'pending') { show('wait'); clearTimeout(timer); timer = setTimeout(check, 6000); return; }
     if (state === 'expired') { $('noTitle').textContent = 'Your access has ended'; $('noText').textContent = 'Your preview period is over. Contact the person who shared the link to open it again.'; show('no'); return; }
     if (state === 'denied' || state === 'revoked') { show('no'); return; }

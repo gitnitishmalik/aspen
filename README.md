@@ -166,6 +166,7 @@ Add `--draft` to publish to the test address (https://gate-test--aspen-homes-con
 Nobody can load the site without approval. `netlify/edge-functions/access.js` runs on Netlify before every request and sends pages, scripts, frames and photos only to approved visitors; everyone else gets the "Request access" page.
 
 - **Approving people.** Open `/_access/admin` and enter the admin key (in `ACCESS-ADMIN-KEY.txt`, which is never published). Approve, deny or revoke requests there, choose how long access lasts (7 days by default), or create a personal invite link for someone. A waiting visitor is let in by itself once approved, on the device they asked from.
+- **What a visitor without access sees.** The real home hero (scroll to build) and, after it, the "Want the full preview?" invitation card. `tools/deploy.py` cuts that hero-only page (`teaser.html`) out of `index.html` on every publish. For it to run, `styles.css`, `main.js`, `motion.js`, the hero frames and the logos are open to everyone; every other page, script and photo stays locked.
 - **Email.** Each request also emails the Netlify account address (Netlify Forms, form `access-request` in `access-form.html`).
 - **Tracing.** Every page is stamped with the approved person's name: a small label in the corner and a comment in the page source. Set `WATERMARK = false` in `access.js` to hide the label.
 - **Revoking** takes effect within 10 minutes (`SESSION_SECONDS`).

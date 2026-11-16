@@ -11,7 +11,9 @@ const GATE_ORIGIN = 'https://aspen-homes-concept.netlify.app';
 const OWNER = 'Design Dervish';
 const WATERMARK = true;                  // small "Private preview for <name>" label on every page
 const SESSION_SECONDS = 600;
-const PUBLIC = new Set(['/robots.txt', '/img/og.jpg', '/img/logo-mark.webp', '/img/gate-hero.webp', '/img/gate-hero-w.webp', '/img/gate-hero-s.webp', '/img/gate-hero-t.webp', '/img/gate-hero-m.webp']);
+// open to everyone: the link-preview picture, the tab icon, and what the hero preview needs to run
+const PUBLIC = new Set(['/robots.txt', '/img/og.jpg', '/img/logo-mark.webp', '/img/logo.webp', '/img/logo-white.webp', '/styles.css', '/main.js', '/motion.js']);
+const isPublic = (path) => PUBLIC.has(path) || /^\/frames\/[pdq]\/[\w-]+\.webp$/.test(path);
 
 const enc = new TextEncoder();
 const b64u = (bytes) => btoa(String.fromCharCode(...new Uint8Array(bytes))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
@@ -82,7 +84,7 @@ export default async function middleware(req) {
   const path = url.pathname;
 
   if (!process.env.GATE_PROXY_KEY) return deny('Access gate is not configured.', 503);
-  if (PUBLIC.has(path)) return pass();
+  if (isPublic(path)) return pass();
   // this middleware fetching a page for itself (see below)
   if (same(req.headers.get('x-gate-internal') || '', await sign('internal'))) return pass();
 

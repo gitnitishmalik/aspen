@@ -12,6 +12,7 @@ Anthropic SDK (installed here from package.json on first use), an ANTHROPIC_API_
 site's environment variables, and LIVE_AI = true in chat.js.
 """
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -20,6 +21,19 @@ SITE = 'bb84affc-286c-4533-aa88-22f589c7f997'  # aspen-homes-concept
 FILES = ('index.html', 'custom-homes.html', 'gallery.html', 'process.html', 'styles.css', 'main.js', 'motion.js',
          'features.js', 'pages.js', 'chat.js', 'house3d.js', '_headers', 'robots.txt', 'access-form.html')
 FOLDERS = ('img', 'frames')
+
+
+def teaser(page):
+    """Hero-only copy of the home page. A visitor without access gets this, with the invitation (added by the
+    access gate at the AA-GATE mark) after the scroll-to-build hero. Nothing below the hero is in it."""
+    s = open(page, encoding='utf-8').read()
+    a = s.index('</section>', s.index('<section class="scrolly"')) + len('</section>')
+    b = s.index('<script src="main.js"')
+    s = s[:a] + '\n  </main>\n\n  <!--AA-GATE-->\n\n  ' + s[b:]
+    s = re.sub(r'\s*<script type="speculationrules">.*?</script>', '', s, flags=re.S)   # no prerender of locked pages
+    s = re.sub(r'\s*<script src="(features|chat)\.js" defer></script>', '', s)
+    return s.replace('<head>', '<head>\n  <base href="/">', 1)
+
 
 here = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 netlify = shutil.which('netlify')
@@ -46,6 +60,8 @@ os.makedirs(stage)
 try:
     for f in FILES:
         shutil.copy2(os.path.join(here, f), stage)
+    with open(os.path.join(stage, 'teaser.html'), 'w', encoding='utf-8') as t:
+        t.write(teaser(os.path.join(here, 'index.html')))
     for d in FOLDERS:
         shutil.copytree(os.path.join(here, d), os.path.join(stage, d))
     with open(toml, 'w', encoding='utf-8') as t:

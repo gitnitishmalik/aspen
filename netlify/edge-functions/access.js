@@ -19,7 +19,9 @@ const DEFAULT_DAYS = 7;                  // how long an approval lasts unless th
 const SESSION_SECONDS = 600;             // approvals are re-checked this often, so a revoke bites within 10 minutes
 const MAX_PENDING_PER_IP = 3;
 const MAX_RECORDS = 500;
-const PUBLIC = new Set(['/robots.txt', '/img/og.jpg', '/img/logo-mark.webp', '/img/gate-hero.webp', '/img/gate-hero-w.webp', '/img/gate-hero-s.webp', '/img/gate-hero-t.webp', '/img/gate-hero-m.webp']);   // link preview picture and tab icon
+// open to everyone: the link-preview picture, the tab icon, and what the hero preview needs to run
+const PUBLIC = new Set(['/robots.txt', '/img/og.jpg', '/img/logo-mark.webp', '/img/logo.webp', '/img/logo-white.webp', '/styles.css', '/main.js', '/motion.js']);
+const isPublic = (path) => PUBLIC.has(path) || /^\/frames\/[pdq]\/[\w-]+\.webp$/.test(path);
 
 const enc = new TextEncoder();
 const env = (k) => Netlify.env.get(k) || '';
@@ -115,7 +117,7 @@ export default async function handler(req, context) {
   const path = url.pathname;
 
   if (!env('ACCESS_SECRET') || !env('ACCESS_ADMIN_KEY')) return new Response('Access gate is not configured.', { status: 503 });
-  if (PUBLIC.has(path)) return context.next();
+  if (isPublic(path)) return context.next();
   if (path === '/access-form.html' && req.method === 'POST') return context.next();   // Netlify Forms: emails the owner
   if (path.startsWith('/_access/')) return api(req, url, context);
 
@@ -138,7 +140,7 @@ export default async function handler(req, context) {
 
   if (!session) {
     const wantsPage = req.method === 'GET' && (req.headers.get('accept') || '').includes('text/html');
-    return wantsPage ? html(GATE, 401) : new Response('Private preview. Access is by approval only.', {
+    return wantsPage ? await gatePage(req, context) : new Response('Private preview. Access is by approval only.', {
       status: 401, headers: { 'content-type': 'text/plain; charset=utf-8', 'cache-control': 'no-store' },
     });
   }
@@ -186,7 +188,7 @@ async function api(req, url, context) {
   }
 
   // the "Request access" page itself, for the Vercel copy to show
-  if (path === '/_access/gate' && req.method === 'GET') return html(GATE, 401);
+  if (path === '/_access/gate' && req.method === 'GET') return gatePage(req, context);
 
   if (path === '/_access/request' && req.method === 'POST') {
     let body;
@@ -215,7 +217,7 @@ async function api(req, url, context) {
   if (path.startsWith('/_access/invite/') && req.method === 'GET') {
     const token = path.slice('/_access/invite/'.length);
     const rec = await recordFromCookie(token);
-    if (stateOf(rec) !== 'approved') return html(GATE, 401);
+    if (stateOf(rec) !== 'approved') return gatePage(req, context);
     return new Response(null, { status: 302, headers: { location: '/', 'cache-control': 'no-store', 'set-cookie': cookie('aa_req', token, 31536000) } });
   }
 
@@ -294,22 +296,12 @@ button:focus-visible,a:focus-visible{outline:2px solid #e4cf9f;outline-offset:3p
 .err{color:#ffb4a8;font-size:14px;min-height:20px;margin:10px 0 0}
 `;
 
-const GATE = `<!doctype html>
-<html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="robots" content="noindex, nofollow"><meta name="theme-color" content="#000b22">
-<title>Private preview</title>
-<link rel="icon" href="/img/logo-mark.webp">
-<meta property="og:title" content="Private preview"><meta property="og:description" content="This website concept is shared by invitation. Request access to view it.">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600&display=swap">
-<style>${BASE_CSS}
-.hero{position:fixed;inset:0;z-index:0;cursor:pointer;background:#000b22}
-.hero img{display:block;width:100%;height:100%;object-fit:cover;object-position:center top}
-.cue{position:fixed;left:50%;bottom:max(22px,env(safe-area-inset-bottom));transform:translateX(-50%);z-index:1;display:flex;align-items:center;gap:10px;white-space:nowrap;padding:12px 18px;font-size:14px;color:#f3efe6;background:rgba(0,11,34,.78);border:1px solid rgba(255,255,255,.28);box-shadow:0 10px 30px rgba(0,0,0,.35);transition:opacity .25s}
-.cue:hover{background:rgba(0,11,34,.92)}.cue svg{animation:nudge 1.6s ease-in-out infinite}@keyframes nudge{50%{transform:translateY(4px)}}
-.cue.off{opacity:0;pointer-events:none}
-.gap{height:100vh;height:100svh}
-.sheet{position:relative;z-index:2;min-height:100vh;min-height:100svh;display:grid;align-content:center;justify-items:center;gap:clamp(26px,5vh,44px);padding:clamp(48px,9vh,96px) 16px;background:rgba(0,11,34,.975);border-top:1px solid rgba(255,255,255,.14);box-shadow:0 -30px 80px rgba(0,0,0,.5)}
+// The invitation: the "Want the full preview?" message and the request card. It is used two ways: under the
+// hero-only copy of the home page (teaser.html, made by tools/deploy.py), and alone if that page is missing.
+const INVITE = `<div id="aa-gate"></div>
+<template id="aa-gate-tpl"><style>${BASE_CSS}
+:host{display:block;position:relative;z-index:50;text-align:left;color:#f3efe6;font:400 16px/1.55 Inter,system-ui,-apple-system,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased}
+.sheet{min-height:100vh;min-height:100svh;display:grid;align-content:center;justify-items:center;gap:clamp(26px,5vh,44px);padding:clamp(56px,10vh,110px) 16px;background:radial-gradient(1100px 620px at 50% 0,#0a1b3d 0,#000b22 62%)}
 .pitch{text-align:center;max-width:640px}.pitch h1{font-size:clamp(36px,7vw,62px);margin-bottom:14px}.pitch p{font-size:clamp(16px,2.2vw,18px);margin:0}
 main{width:100%;max-width:500px;background:#f6f1e6;color:#001233;border-radius:6px;padding:9px;box-shadow:0 40px 90px rgba(0,0,0,.55)}
 .frame{border:1px solid #c9a96e;outline:1px solid rgba(201,169,110,.5);outline-offset:-6px;padding:clamp(30px,6vw,46px) clamp(22px,5vw,42px) clamp(24px,5vw,34px);text-align:center}
@@ -328,17 +320,14 @@ main .err{color:#a3271a}
 form button{width:100%;margin-top:26px}
 .foot{font-size:12.5px;color:rgba(0,18,51,.55);margin:24px 0 0;text-align:center}
 .dots::after{content:'';animation:d 1.4s steps(4) infinite}@keyframes d{0%{content:''}25%{content:'.'}50%{content:'..'}75%{content:'...'}}
-@media(prefers-reduced-motion:reduce){.dots::after{animation:none;content:'...'}.cue svg{animation:none}}
+@media(prefers-reduced-motion:reduce){.dots::after{animation:none;content:'...'}}
 [hidden]{display:none!important}
-</style></head><body>
-<div class="hero" id="hero"><picture><source media="(max-width:700px) and (orientation:portrait)" srcset="/img/gate-hero-m.webp"><source media="(orientation:portrait)" srcset="/img/gate-hero-t.webp"><source media="(min-aspect-ratio:19/10)" srcset="/img/gate-hero-w.webp"><source media="(max-aspect-ratio:33/20)" srcset="/img/gate-hero-s.webp"><img src="/img/gate-hero.webp" width="1920" height="1080" alt="Preview of the home page of this website concept" draggable="false"></picture></div>
-<button class="cue" id="cue" type="button">Want the full preview? <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></button>
-<div class="gap"></div>
-<div class="sheet" id="sheet">
+</style>
+<div class="sheet">
 <div class="pitch">
   <span class="tag">Private preview</span>
   <h1>Want the <em>full preview?</em></h1>
-  <p>That was the first screen. The complete concept, with every page and the scroll-to-build animation, is shared by invitation only.</p>
+  <p>{lead}</p>
 </div>
 <main><div class="frame">
   <div class="lock" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e4cf9f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10.5" width="16" height="10" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg></div>
@@ -373,12 +362,20 @@ form button{width:100%;margin-top:26px}
   <p class="foot">This demo preview belongs to the owner who created it.</p>
 </div></main>
 </div>
+</template>
 <script>
 (function () {
-  var $ = function (id) { return document.getElementById(id); }, timer, first = true;
-  function down(smooth) { $('sheet').scrollIntoView({ behavior: smooth && !matchMedia('(prefers-reduced-motion: reduce)').matches ? 'smooth' : 'auto' }); }
-  $('hero').addEventListener('click', function () { down(true); }); $('cue').addEventListener('click', function () { down(true); });
-  addEventListener('scroll', function () { $('cue').classList.toggle('off', scrollY > 40); }, { passive: true });
+  // the invitation sits in a shadow root: the page's own styles can't reach it, and its styles can't leak out
+  var host = document.getElementById('aa-gate'), root = host.attachShadow({ mode: 'open' });
+  root.appendChild(document.getElementById('aa-gate-tpl').content.cloneNode(true));
+  var $ = function (id) { return root.getElementById(id); }, timer, first = true;
+  function down(smooth) { host.scrollIntoView({ behavior: smooth && !matchMedia('(prefers-reduced-motion: reduce)').matches ? 'smooth' : 'auto' }); }
+  // under the hero preview, links to the rest of the site lead to the invitation instead
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a || host.contains(a) || /^(tel|mailto):/.test(a.getAttribute('href'))) return;
+    e.preventDefault(); e.stopPropagation(); down(true);
+  }, true);
   function show(id) { ['ask', 'wait', 'no'].forEach(function (s) { $(s).hidden = s !== id; }); }
   function apply(state) {
     if (state === 'approved') { location.reload(); return; }
@@ -412,8 +409,38 @@ form button{width:100%;margin-top:26px}
   });
   check();
 })();
-</script>
+</script>`;
+
+const FONTS = '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600&display=swap">';
+const LEAD_HERO = 'You just watched the first screen build itself. The complete concept, with every page, is shared by invitation only.';
+const LEAD_ALONE = 'This website concept, with every page of it, is shared by invitation only.';
+const MARK = '<!--AA-GATE-->';
+
+const GATE = `<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow"><meta name="theme-color" content="#000b22">
+<title>Private preview</title>
+<link rel="icon" href="/img/logo-mark.webp">
+<meta property="og:title" content="Private preview"><meta property="og:description" content="This website concept is shared by invitation. Request access to view it.">
+${FONTS}
+<style>html,body{margin:0;background:#000b22}</style></head><body>
+${INVITE.replace('{lead}', LEAD_ALONE)}
 </body></html>`;
+
+// What a visitor without access gets: the real home hero (scroll to build) and, after it, the invitation.
+async function gatePage(req, context) {
+  try {
+    const res = await context.next(new Request(new URL('/teaser.html', req.url), { headers: { accept: 'text/html' } }));
+    if (res.status === 200) {
+      const text = await res.text();
+      if (text.includes(MARK)) {
+        return html(text.replace('</head>', () => `${FONTS}\n</head>`).replace(MARK, () => INVITE.replace('{lead}', LEAD_HERO)), 401);
+      }
+    }
+  } catch { /* fall through to the plain invitation */ }
+  return html(GATE, 401);
+}
 
 const ADMIN = `<!doctype html>
 <html lang="en"><head><meta charset="utf-8">

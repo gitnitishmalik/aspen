@@ -1,0 +1,14 @@
+# kept out of the Vercel site: only the pages, their scripts, img/ and frames/ are published
+README.md
+tools
+pages-src
+netlify
+node_modules
+package.json
+package-lock.json
+_headers
+access-form.html
+ACCESS-ADMIN-KEY.txt
+.netlify
+.deploy
+netlify.toml

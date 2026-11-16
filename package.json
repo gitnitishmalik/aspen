@@ -1,0 +1,9 @@
+{
+  "name": "aspen-cinematic",
+  "private": true,
+  "description": "Aspen Homes homepage concept. The page itself needs no build; this file only holds the chat function's dependency.",
+  "dependencies": {
+    "@anthropic-ai/sdk": "0.137.0",
+    "@netlify/blobs": "^11.1.9"
+  }
+}

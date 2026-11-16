@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Custom Home Builder in Hutto, TX | Aspen Homes</title>
+  <meta name="description" content="Aspen Homes is a family-owned custom home builder in Hutto, TX. Custom homes, luxury farmhouses, barndominiums and remodeling across Round Rock, Georgetown, Liberty Hill and Central Texas.">
+  <meta name="theme-color" content="#001233">
+  <!-- website concept for Aspen Homes: kept out of search engines so it never competes with aspenhomesoftx.com -->
+  <meta name="robots" content="noindex, nofollow">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aspen-homes-concept.netlify.app/">
+  <meta property="og:title" content="Aspen Homes | Homes built to last">
+  <meta property="og:description" content="A new homepage concept for Aspen Homes: scroll to watch your home being built, from slab to keys.">
+  <meta property="og:image" content="https://aspen-homes-concept.netlify.app/img/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="img/logo-mark.webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="image" href="img/logo-mark.webp" fetchpriority="high">
+  <!-- first hero frame; main.js fetches frames, so the preload is a fetch too (1280 set on phones and 1x screens up to 1500px) -->
+  <link rel="preload" as="fetch" crossorigin="anonymous" href="frames/p/001.webp" media="(max-width: 699px), (max-width: 1500px) and (max-resolution: 1.2dppx)" fetchpriority="high">
+  <link rel="preload" as="fetch" crossorigin="anonymous" href="frames/d/001.webp" media="(min-width: 700px) and (min-resolution: 1.21dppx), (min-width: 1501px)" fetchpriority="high">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600&display=swap"></noscript>
+  <link rel="stylesheet" href="styles.css">
+  <!-- tab switching: Chrome and Edge prerender an inner page while you hover its link (or press it), so it opens
+       instantly; the home page is only prefetched, because its build film loads when you arrive. The patterns
+       match "gallery.html" and Netlify's pretty "/gallery" alike; photo links are never prerendered. -->
+  <script type="speculationrules">
+  {"prerender": [{"where": {"and": [{"href_matches": "/*"}, {"not": {"href_matches": "/"}}, {"not": {"href_matches": "/index{.html}?"}},
+     {"not": {"href_matches": "/img/*"}}, {"not": {"href_matches": "/frames/*"}}, {"not": {"selector_matches": "[data-lightbox], [download]"}}]}, "eagerness": "moderate"}],
+   "prefetch": [{"where": {"or": [{"href_matches": "/"}, {"href_matches": "/index{.html}?"}]}, "eagerness": "moderate"}]}
+  </script>
+  <!-- a page switch the browser skips animating (a typed address) shouldn't log an error on the arriving page -->
+  <script>addEventListener("pagereveal", function (e) { var v = e.viewTransition; if (v) [v.ready, v.finished, v.updateCallbackDone].forEach(function (p) { if (p) p.catch(function () {}); }); });</script>
+</head>
+<body class="is-loading">
+  <!-- WhatsApp glyph, defined once and reused (<use href="#i-wa">) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></symbol>
+  </svg>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- Loader: the Aspen coin spins and fills with colour while the first frames load (max ~2.4 s),
+       then flies to the logo in the header -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__bg"></div>
+    <div class="coin" id="coin">
+      <svg class="coin__ring" viewBox="0 0 120 120"><circle class="coin__track" cx="60" cy="60" r="57"/><circle class="coin__fill" id="loaderRing" cx="60" cy="60" r="57" pathLength="100"/></svg>
+      <div class="coin__spin">
+        <img class="coin__face" src="img/logo-mark.webp" width="241" height="241" alt="">
+        <img class="coin__face coin__face--back" src="img/logo-mark.webp" width="241" height="241" alt="">
+      </div>
+    </div>
+    <div class="loader__foot">
+      <p class="loader__count"><span id="loaderPct">0</span><small>%</small></p>
+      <p class="loader__meta">Aspen Homes &middot; Preparing the build site<br><span>30.5427&deg; N &middot; 97.5467&deg; W</span></p>
+    </div>
+    <div class="loader__bar"><span id="loaderBar"></span></div>
+  </div>
+
+  <!-- Page switch: the coin returns while the next page loads -->
+  <div class="veil" aria-hidden="true">
+    <div class="veil__coin"><img src="img/logo-mark.webp" width="241" height="241" alt=""></div>
+  </div>
+
+  <header class="nav" id="nav">
+    <a class="nav__brand" href="index.html" aria-label="Aspen Homes home">
+      <span class="nav__logo">
+        <img class="logo-light" src="img/logo-white.webp" width="800" height="241" alt="Aspen Homes">
+        <img class="logo-dark" src="img/logo.webp" width="800" height="241" alt="">
+      </span>
+      <span class="nav__tag">Custom Homes &middot; Hutto, TX</span>
+    </a>
+    <button class="nav__burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu">
+      <span></span><span></span>
+    </button>
+    <nav class="nav__menu" id="menu" aria-label="Main">
+      <a href="custom-homes.html">Homes</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="process.html">Process</a>
+      <a href="index.html#reviews">Reviews</a>
+      <a class="nav__phone" href="tel:5128485647">(512) 848-5647</a>
+      <a class="pill" href="index.html#plan">Plan your home</a>
+      <p class="nav__menu-foot">Hutto, TX 78634<br>Mon&ndash;Fri 8&ndash;5 &middot; Sat&ndash;Sun 10&ndash;3:30</p>
+    </nav>
+    <i class="nav__progress" aria-hidden="true"></i>
+  </header>
+
+  <main id="main">
+    <!-- HERO: scroll to build -->
+    <section class="scrolly" id="build" data-frames="150" data-step="2" data-sets="p:1280,d:1920,q:2560" aria-labelledby="hero-title">
+      <div class="stage">
+        <canvas class="stage__canvas" id="stage" aria-hidden="true"></canvas>
+        <div class="stage__blueprint" aria-hidden="true"></div>
+        <div class="stage__shade" aria-hidden="true"></div>
+        <div class="stage__grain" aria-hidden="true"></div>
+        <div class="marks" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+
+        <div class="intro">
+          <p class="eyebrow">Family-owned &middot; Hutto, Texas</p>
+          <h1 id="hero-title"><span class="ln"><span>Homes built</span></span><span class="ln"><span>to <em>last.</em></span></span></h1>
+          <p class="intro__sub">Custom homes, luxury farmhouses and barndominiums, built on your lot across Central Texas.</p>
+          <div class="intro__cta">
+            <a class="btn btn--light" href="#plan">Plan your home <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+            <a class="btn btn--ghost" href="#homes">See our homes</a>
+          </div>
+        </div>
+
+        <ol class="caps" aria-live="polite">
+          <li class="cap" data-from="1" data-to="17"><small>01 &mdash; Design</small><strong>Every home starts as a <em>plan.</em></strong><span>Choose one of our floor plans, or draw a new one with our in-house architect.</span></li>
+          <li class="cap" data-from="18" data-to="45"><small>02 &mdash; Site &amp; foundation</small><strong>Just provide the <em>lot.</em></strong><span>We'll do the rest, from excavating and site prep to the slab.</span></li>
+          <li class="cap" data-from="46" data-to="84"><small>03 &mdash; Framing</small><strong>Then the frame <em>goes up.</em></strong><span>Walls, trusses and sheathing, built to your design.</span></li>
+          <li class="cap" data-from="85" data-to="106"><small>04 &mdash; Roof &amp; walls</small><strong>Under <em>roof.</em></strong><span>Shingles, siding and windows close it in.</span></li>
+          <li class="cap" data-from="107" data-to="120"><small>05 &mdash; Finishes</small><strong>Every detail, <em>finished.</em></strong><span>Trim, lighting and the touches you chose.</span></li>
+          <li class="cap" data-from="121" data-to="150"><small>06 &mdash; Move-in</small><strong>Welcome <em>home.</em></strong><span>From construction to cleanup, then the keys.</span></li>
+        </ol>
+
+        <div class="finale">
+          <a class="btn btn--light" href="#plan">Plan your home</a>
+          <a class="btn btn--ghost" href="tel:5128485647">Call (512) 848-5647</a>
+        </div>
+
+        <div class="hud" aria-hidden="true">
+          <p class="hud__pct"><span id="hudPct">000</span><small>%</small></p>
+          <p class="hud__label">Build progress<br><b id="hudStage">Design</b></p>
+        </div>
+        <p class="geo" aria-hidden="true">30.5427&deg; N &nbsp;97.5467&deg; W<br>Hutto, Texas</p>
+
+        <div class="rail" aria-hidden="true">
+          <span class="rail__track"><span class="rail__fill"></span></span>
+          <ol><li>Design</li><li>Foundation</li><li>Framing</li><li>Roof &amp; walls</li><li>Finishes</li><li>Move-in</li></ol>
+        </div>
+
+        <p class="cue" aria-hidden="true"><span></span>Scroll to build</p>
+      </div>
+    </section>
+
+    <!-- BAND: two rows of type that drift with the scroll -->
+    <div class="band" aria-hidden="true">
+      <div class="band__row" data-speed="1"><div class="band__track"><span>Designed in-house</span><b></b><span>Built on your lot</span><b></b><span>Family-owned</span><b></b><span>Hutto, Texas</span><b></b></div></div>
+      <div class="band__row band__row--serif" data-speed="-1"><div class="band__track"><span>Custom homes</span><b></b><span>Luxury farmhouses</span><b></b><span>Barndominiums</span><b></b><span>Remodeling</span><b></b></div></div>
+    </div>
+
+    <!-- PROOF: what every Aspen build includes (from aspenhomesoftx.com) -->
+    <div class="proof" role="list" aria-label="What every Aspen build includes">
+      <div class="proof__item reveal" role="listitem"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg><p><b>10-year structural warranty</b><span>Maverick Builder Warranty on every new home</span></p></div>
+      <div class="proof__item reveal" role="listitem"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l3 3v15H6z"/><path d="M9 10h6M9 14h6M9 18h3"/></svg><p><b>Fixed-price proposals</b><span>Turnkey pricing before you sign</span></p></div>
+      <div class="proof__item reveal" role="listitem"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4h6v3H9z"/><path d="M7 5H5v16h14V5h-2"/><path d="M8.5 14l2.5 2.5 4.5-5"/></svg><p><b>Third-party inspections</b><span>At every major stage of the build</span></p></div>
+      <div class="proof__item reveal" role="listitem"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v3M5 21l7-15 7 15M8 15h8"/></svg><p><b>In-house architect</b><span>Plus a design center for your selections</span></p></div>
+      <div class="proof__item reveal" role="listitem"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></svg><p><b>Reviewed on Google</b><span><a href="#reviews">Read what clients say</a></span></p></div>
+    </div>
+
+    <!-- STORY -->
+    <section class="story lazy" aria-labelledby="story-title">
+      <p class="kicker">About Aspen Homes</p>
+      <h2 id="story-title" class="story__lead" data-split>A family-owned builder with <em>decades of combined experience.</em> Bring us your lot, and we'll handle everything from <em>excavating and site prep</em> to construction and cleanup.</h2>
+      <dl class="facts">
+        <div class="reveal"><dt><span data-count="9">9</span></dt><dd>Central Texas towns we build in</dd></div>
+        <div class="reveal"><dt><span data-count="4">4</span></dt><dd>Ways to build: custom, farmhouse, barndominium, remodel</dd></div>
+        <div class="reveal"><dt><span data-count="1">1</span></dt><dd>In-house architect to draw your plans</dd></div>
+        <div class="reveal"><dt><span data-count="7">7</span></dt><dd>Days a week, we pick up the phone</dd></div>
+      </dl>
+    </section>
+
+    <!-- SERVICES: big list, image preview follows the cursor on desktop -->
+    <section class="services lazy" id="services" aria-labelledby="services-title">
+      <div class="head">
+        <p class="kicker">Our Services</p>
+        <h2 id="services-title" class="title" data-split>Expert custom home construction <span>in Austin, TX, and surrounding areas.</span></h2>
+      </div>
+      <ul class="svc">
+        <li class="reveal"><a href="custom-homes.html#custom" data-img="img/aspen/out-03.webp">
+          <span class="svc__num">01</span>
+          <span class="svc__name">Custom Homes</span>
+          <span class="svc__desc">The style and design you want, built on your lot.</span>
+          <img class="svc__thumb" src="img/aspen/out-03.webp" width="1099" height="686" alt="" loading="lazy" decoding="async">
+          <svg class="svc__go" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a></li>
+        <li class="reveal"><a href="custom-homes.html#farmhouse" data-img="img/aspen/ext-06.webp">
+          <span class="svc__num">02</span>
+          <span class="svc__name">Luxury Farmhouses</span>
+          <span class="svc__desc">Built to last, designed with our in-house architect.</span>
+          <img class="svc__thumb" src="img/aspen/ext-06.webp" width="1024" height="683" alt="" loading="lazy" decoding="async">
+          <svg class="svc__go" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a></li>
+        <li class="reveal"><a href="custom-homes.html#barndominium" data-img="img/aspen/liv-06.webp">
+          <span class="svc__num">03</span>
+          <span class="svc__name">Barndominiums</span>
+          <span class="svc__desc">Barndominiums that blend style and strength.</span>
+          <img class="svc__thumb" src="img/aspen/liv-06.webp" width="1100" height="733" alt="" loading="lazy" decoding="async">
+          <svg class="svc__go" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a></li>
+        <li class="reveal"><a href="custom-homes.html#remodeling" data-img="img/aspen/kit-03.webp">
+          <span class="svc__num">04</span>
+          <span class="svc__name">Remodeling</span>
+          <span class="svc__desc">Kitchens, bathrooms, porches and additions for any outdated space.</span>
+          <img class="svc__thumb" src="img/aspen/kit-03.webp" width="1024" height="683" alt="" loading="lazy" decoding="async">
+          <svg class="svc__go" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a></li>
+      </ul>
+      <div class="peek" aria-hidden="true"><img alt=""><span class="peek__label">View service</span></div>
+    </section>
+
+    <!-- FRAME TO FINISH: drag to compare the same house at framing and at move-in -->
+    <section class="ff" id="frame-to-finish" aria-labelledby="ff-title">
+      <div class="head head--row">
+        <div>
+          <p class="kicker">From frame to finish</p>
+          <h2 id="ff-title" class="title" data-split>See what goes <span>into <em>every wall.</em></span></h2>
+        </div>
+        <p class="head__aside">Drag across the same house at framing and at move-in. Walls, trusses and sheathing go up to your design, then trim, lighting and the touches you chose finish it.</p>
+      </div>
+      <figure class="compare reveal-img">
+        <img class="compare__after" src="img/compare-finish.webp" srcset="img/compare-finish-sm.webp 1280w, img/compare-finish.webp 1920w" sizes="(max-width: 1320px) 100vw, 1240px" width="1920" height="1080" alt="Rendering of the finished home: a white farmhouse with a dark shingle roof, cedar posts and a front walk" loading="lazy" decoding="async">
+        <div class="compare__before">
+          <img src="img/compare-frame.webp" srcset="img/compare-frame-sm.webp 1280w, img/compare-frame.webp 1920w" sizes="(max-width: 1320px) 100vw, 1240px" width="1920" height="1080" alt="Rendering of the same home at framing: timber walls and roof trusses on the slab, with scaffolding" loading="lazy" decoding="async">
+        </div>
+        <span class="compare__tag compare__tag--l" aria-hidden="true">03 &mdash; Framing</span>
+        <span class="compare__tag compare__tag--r" aria-hidden="true">06 &mdash; Move-in</span>
+        <div class="compare__handle" aria-hidden="true"><span><svg viewBox="0 0 24 24"><path d="M9 6l-5 6 5 6M15 6l5 6-5 6"/></svg></span></div>
+        <label class="sr" for="compareRange">Compare the framing and the finished home</label>
+        <input class="compare__range" id="compareRange" type="range" min="0" max="100" step="1" value="50">
+      </figure>
+      <ol class="ff__steps">
+        <li class="reveal"><b>01</b><span>Plan</span><small>Floor plans, or new drawings with our in-house architect.</small></li>
+        <li class="reveal"><b>02</b><span>Site &amp; slab</span><small>Excavating, site prep and the foundation.</small></li>
+        <li class="reveal"><b>03</b><span>Frame &amp; roof</span><small>Walls, trusses, sheathing, shingles and siding.</small></li>
+        <li class="reveal"><b>04</b><span>Finish &amp; keys</span><small>Trim, lighting, cleanup, then move-in.</small></li>
+      </ol>
+    </section>
+
+    <!-- HOMES: pinned horizontal gallery on desktop, swipe carousel on phones -->
+    <section class="homes" id="homes" aria-labelledby="homes-title">
+      <div class="homes__pin">
+        <div class="homes__intro">
+          <p class="kicker">Gallery</p>
+          <h2 id="homes-title" class="title" data-split>Homes we're proud <span>to put our <em>name</em> on.</span></h2>
+          <p>Real Aspen homes across Central Texas, from limestone ranches to modern farmhouses and the rooms inside them.</p>
+          <a class="link" href="gallery.html">View the full gallery <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        </div>
+        <div class="homes__track">
+          <a class="card" href="img/modern-farmhouse.webp" data-lightbox data-title="Modern farmhouse" data-tag="Exteriors" aria-label="View modern farmhouse photo larger">
+            <span class="card__media"><img src="img/modern-farmhouse.webp" srcset="img/modern-farmhouse-sm.webp 640w, img/modern-farmhouse.webp 1024w" sizes="(max-width: 860px) 86vw, 60vw" width="1024" height="683" alt="White modern farmhouse with black windows at the end of a long concrete drive at dusk" loading="lazy" decoding="async"></span>
+            <span class="card__meta"><span class="card__num">01</span><b>Modern farmhouse</b><span>Exteriors</span></span>
+          </a>
+          <a class="card card--tall" href="img/primary-bath.webp" data-lightbox data-title="Primary bath" data-tag="Bathrooms" aria-label="View primary bath photo larger">
+            <span class="card__media"><img src="img/primary-bath.webp" srcset="img/primary-bath-sm.webp 480w, img/primary-bath.webp 800w" sizes="(max-width: 860px) 70vw, 30vw" width="800" height="1201" alt="Primary bathroom with marble floors, a walk-in shower and a lit vanity" loading="lazy" decoding="async"></span>
+            <span class="card__meta"><span class="card__num">02</span><b>Primary bath</b><span>Bathrooms</span></span>
+          </a>
+          <a class="card" href="img/stone-ranch.webp" data-lightbox data-title="Limestone ranch" data-tag="Custom Homes" aria-label="View limestone ranch photo larger">
+            <span class="card__media"><img src="img/stone-ranch.webp" srcset="img/stone-ranch-sm.webp 640w, img/stone-ranch.webp 1024w" sizes="(max-width: 860px) 86vw, 60vw" width="1024" height="683" alt="Single-storey limestone ranch home under a clear sky" loading="lazy" decoding="async"></span>
+            <span class="card__meta"><span class="card__num">03</span><b>Limestone ranch</b><span>Custom Homes</span></span>
+          </a>
+          <a class="card" href="img/game-room.webp" data-lightbox data-title="Game room" data-tag="Living Rooms" aria-label="View game room photo larger">
+            <span class="card__media"><img src="img/game-room.webp" srcset="img/game-room-sm.webp 640w, img/game-room.webp 1134w" sizes="(max-width: 860px) 86vw, 60vw" width="1134" height="850" alt="Large game room with a coffered ceiling and built-in cabinets" loading="lazy" decoding="async"></span>
+            <span class="card__meta"><span class="card__num">04</span><b>Game room</b><span>Living Rooms</span></span>
+          </a>
+          <a class="card card--end" href="gallery.html">
+            <span class="card__end-k">The full gallery</span>
+            <span class="card__end-t">See every <em>home.</em></span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
+        <div class="homes__progress" aria-hidden="true"><span></span></div>
+      </div>
+    </section>
+
+    <!-- BUILD ON YOUR LOT -->
+    <section class="lot lazy" aria-labelledby="lot-title">
+      <figure class="lot__media reveal-img">
+        <img src="img/board-batten-farmhouse.webp" srcset="img/board-batten-farmhouse-sm.webp 640w, img/board-batten-farmhouse.webp 1114w" sizes="(max-width: 860px) 100vw, 55vw" width="1114" height="743" alt="White board-and-batten farmhouse with a metal roof on a green lawn" loading="lazy" decoding="async">
+        <figcaption>Designed in-house</figcaption>
+      </figure>
+      <div class="lot__text">
+        <p class="kicker">Build-On-Your-Lot</p>
+        <h2 id="lot-title" class="title" data-split>Luxury farmhouses <span>built to <em>last.</em></span></h2>
+        <p>Maybe you know what features you want but haven't settled on a floor plan. Aspen Homes employs an in-house architect who can work with you to design a functional and comfortable home. Choose from our in-house floor plans and customize your house with the options you want, or work with our architect to create new plans from scratch.</p>
+        <ul class="ticks">
+          <li>Construct a unique building, like a luxury farmhouse or barndominium</li>
+          <li>Update your house with home renovations and remodeling</li>
+          <li>Build a functional, attractive home addition</li>
+          <li>Demolish your house and start over with a custom plan</li>
+        </ul>
+        <a class="btn btn--dark" href="process.html#lot">How build-on-your-lot works <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+      </div>
+    </section>
+
+    <!-- PLAN YOUR HOME: a four-step brief that sketches the house as you answer -->
+    <section class="plan" id="plan" aria-labelledby="plan-title">
+      <div class="head head--row">
+        <div>
+          <p class="kicker kicker--light">Plan your home</p>
+          <h2 id="plan-title" class="title title--light" data-split>Sketch your home <span>in <em>two minutes.</em></span></h2>
+        </div>
+        <p class="head__aside">Tell us what you'd like to build. We'll draw it as you go, then hand your brief to the Aspen team so the first call starts with your plan.</p>
+      </div>
+
+      <div class="plan__grid">
+        <form class="planner" id="planner" novalidate>
+          <ol class="planner__steps">
+            <li class="on" aria-current="step"><b>01</b> Home</li>
+            <li><b>02</b> Size</li>
+            <li><b>03</b> Lot</li>
+            <li><b>04</b> You</li>
+          </ol>
+          <div class="planner__bar" aria-hidden="true"><span></span></div>
+
+          <fieldset class="step is-on" data-step="0">
+            <legend>What are we building?</legend>
+            <div class="choices">
+              <label class="choice"><input type="radio" name="type" value="custom" checked>
+                <span class="choice__body"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 20h20M4 20v-7h16v7M3 13l4-4h10l4 4M9 20v-5h3v5M14.5 15.5h3v2h-3z"/></svg><b>Custom home</b><small>The style and design you want, built on your lot.</small></span></label>
+              <label class="choice"><input type="radio" name="type" value="farmhouse">
+                <span class="choice__body"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 20h20M4 20v-8M20 20v-8M2.5 13.5L12 5l9.5 8.5M10 20v-5h4v5M7 12v8M17 12v8"/></svg><b>Luxury farmhouse</b><small>Built to last, designed with our in-house architect.</small></span></label>
+              <label class="choice"><input type="radio" name="type" value="barndo">
+                <span class="choice__body"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M1.5 20h21M3 20v-9h18v9M2 11.5L12 6l10 5.5M5 14h5M13 20v-6h6v6M13 16h6M13 18h6"/></svg><b>Barndominium</b><small>Barndominiums that blend style and strength.</small></span></label>
+              <label class="choice"><input type="radio" name="type" value="remodel">
+                <span class="choice__body"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 20h13M4 20v-8l5.5-4.5L15 12v8M8 20v-4h3v4M19 8v8M15 12h8" /></svg><b>Remodel or addition</b><small>Kitchens, bathrooms, porches and additions.</small></span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="step" data-step="1" hidden>
+            <legend>How much home?</legend>
+            <div class="range">
+              <div class="range__top"><label for="sqft" id="sqftLabel">Living space</label><output id="sqftOut" for="sqft">2,800 sq ft</output></div>
+              <input id="sqft" name="sqft" type="range" min="1200" max="6000" step="100" value="2800">
+              <div class="range__scale" aria-hidden="true"><span>1,200</span><span>3,600</span><span>6,000</span></div>
+            </div>
+            <div class="segs" data-only="build">
+              <div class="seg" role="radiogroup" aria-labelledby="bedsL"><p id="bedsL">Bedrooms</p>
+                <label><input type="radio" name="beds" value="2"><span>2</span></label><label><input type="radio" name="beds" value="3"><span>3</span></label><label><input type="radio" name="beds" value="4" checked><span>4</span></label><label><input type="radio" name="beds" value="5"><span>5</span></label><label><input type="radio" name="beds" value="6"><span>6+</span></label>
+              </div>
+              <div class="seg" role="radiogroup" aria-labelledby="bathsL"><p id="bathsL">Bathrooms</p>
+                <label><input type="radio" name="baths" value="2"><span>2</span></label><label><input type="radio" name="baths" value="3" checked><span>3</span></label><label><input type="radio" name="baths" value="4"><span>4</span></label><label><input type="radio" name="baths" value="5"><span>5+</span></label>
+              </div>
+              <div class="seg" role="radiogroup" aria-labelledby="storiesL"><p id="storiesL">Stories</p>
+                <label><input type="radio" name="stories" value="1" checked><span>One</span></label><label><input type="radio" name="stories" value="2"><span>Two</span></label>
+              </div>
+            </div>
+            <div class="scope" data-only="remodel" hidden>
+              <p id="scopeL">What are we updating?</p>
+              <div class="chips" role="group" aria-labelledby="scopeL">
+                <label><input type="checkbox" name="scope" value="Kitchen" checked><span>Kitchen</span></label>
+                <label><input type="checkbox" name="scope" value="Bathrooms"><span>Bathrooms</span></label>
+                <label><input type="checkbox" name="scope" value="Porch"><span>Porch</span></label>
+                <label><input type="checkbox" name="scope" value="Addition" checked><span>Addition</span></label>
+                <label><input type="checkbox" name="scope" value="Flooring"><span>Flooring</span></label>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="step" data-step="2" hidden>
+            <legend>Where and when?</legend>
+            <div class="seg seg--wide" role="radiogroup" aria-labelledby="lotL"><p id="lotL">Your lot</p>
+              <label><input type="radio" name="lot" value="I own a lot" checked><span>I own a lot</span></label><label><input type="radio" name="lot" value="I'm looking for land"><span>Looking for land</span></label><label><input type="radio" name="lot" value="It's my current home"><span>My current home</span></label>
+            </div>
+            <div class="field">
+              <label for="town">Town</label>
+              <div class="select"><select id="town" name="town">
+                <option>Hutto</option><option>Round Rock</option><option selected>Georgetown</option><option>Liberty Hill</option><option>Austin</option><option>Taylor</option><option>Marble Falls</option><option>Horseshoe Bay</option><option>Spicewood</option><option value="Elsewhere in Central Texas">Somewhere else</option>
+              </select></div>
+            </div>
+            <div class="seg seg--wide" role="radiogroup" aria-labelledby="whenL"><p id="whenL">When would you like to start?</p>
+              <label><input type="radio" name="when" value="As soon as possible"><span>Right away</span></label><label><input type="radio" name="when" value="Within 6 months" checked><span>Within 6 months</span></label><label><input type="radio" name="when" value="In 6 to 12 months"><span>6&ndash;12 months</span></label><label><input type="radio" name="when" value="Just exploring"><span>Just exploring</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="step" data-step="3" hidden>
+            <legend>Who is this brief for?</legend>
+            <div class="field">
+              <label for="pName">Your name <abbr title="required">*</abbr></label>
+              <input id="pName" name="name" type="text" autocomplete="name" required aria-describedby="pNameErr">
+              <p class="field__err" id="pNameErr" role="alert"></p>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="pEmail">Email <span class="opt">optional</span></label>
+                <input id="pEmail" name="email" type="email" autocomplete="email" inputmode="email" aria-describedby="pEmailErr">
+                <p class="field__err" id="pEmailErr" role="alert"></p>
+              </div>
+              <div class="field">
+                <label for="pPhone">Phone <span class="opt">optional</span></label>
+                <input id="pPhone" name="phone" type="tel" autocomplete="tel" inputmode="tel">
+              </div>
+            </div>
+            <div class="field">
+              <label for="pNotes">Anything else? <span class="opt">optional</span></label>
+              <textarea id="pNotes" name="notes" rows="3" placeholder="A wraparound porch, a shop, room for horses..."></textarea>
+            </div>
+          </fieldset>
+
+          <div class="planner__nav">
+            <button type="button" class="btn btn--line" data-back hidden><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13 8H3M7 4L3 8l4 4"/></svg> Back</button>
+            <button type="button" class="btn btn--brass" data-next>Next <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+            <button type="submit" class="btn btn--brass" data-send hidden>Create my Home Brief <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+            <p class="planner__alt">Prefer to talk? <a href="tel:5128485647">(512) 848-5647</a></p>
+          </div>
+
+          <div class="planner__done" hidden tabindex="-1">
+            <svg class="planner__check" viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="24"/><path d="M15 27l7 7 15-16"/></svg>
+            <h3>Your Home Brief is ready.</h3>
+            <p>Your home, your finishes and your answers, on one page. Save it as a PDF, or send it straight to the Aspen team. Prefer to talk? Call <a href="tel:5128485647">(512) 848-5647</a>.</p>
+            <div class="planner__done-row">
+              <button type="button" class="btn btn--brass" data-open-brief>Open my brief</button>
+              <button type="button" class="btn btn--line" data-copy>Copy as text</button>
+              <button type="button" class="btn btn--line" data-restart>Start over</button>
+            </div>
+            <p class="planner__copied" role="status"></p>
+          </div>
+        </form>
+
+        <div class="sheet">
+          <div class="sheet__top">
+            <div class="sheet__tabs" role="tablist" aria-label="Sketch view">
+              <button type="button" role="tab" id="tab3d" aria-selected="true" aria-controls="view3d" data-view="3d">3D model</button>
+              <button type="button" role="tab" id="tabPlan" aria-selected="false" aria-controls="viewPlan" data-view="plan" tabindex="-1">Elevation</button>
+            </div>
+            <span class="sheet__note" aria-hidden="true">Sketch, not to scale</span>
+          </div>
+          <div class="sheet__stage" data-view="3d">
+            <div class="sheet__view sheet__view--3d" id="view3d" role="tabpanel" aria-labelledby="tab3d">
+              <canvas class="sheet__canvas" id="house3d" role="img" aria-label="3D model of your home. Drag sideways to turn it."></canvas>
+              <div class="sheet__tags" aria-hidden="true"></div>
+              <p class="sheet__loading" aria-hidden="true"><span></span>Building your 3D model</p>
+              <p class="sheet__hint" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M4 12h16"/></svg>Drag to turn</p>
+            </div>
+            <div class="sheet__view sheet__view--plan" id="viewPlan" role="tabpanel" aria-labelledby="tabPlan">
+              <svg class="sheet__svg" id="sheetSvg" viewBox="0 0 800 420" role="img" aria-label="Front elevation sketch of your home">
+                <defs>
+                  <pattern id="stone" width="24" height="12" patternUnits="userSpaceOnUse"><path d="M0 .5h24M0 6.5h24M6 .5v6M18 6.5v6" fill="none" stroke="currentColor" stroke-width=".8" opacity=".55"/></pattern>
+                  <pattern id="earth" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0v10" stroke="currentColor" stroke-width=".8" opacity=".35"/></pattern>
+                </defs>
+                <g id="sheetDraw"></g>
+              </svg>
+            </div>
+          </div>
+          <!-- Design Studio: light and finishes for the 3D model (features.js) -->
+          <div class="studio" id="studio">
+            <div class="studio__time">
+              <div class="studio__label"><label for="tod">Light</label><output id="todOut" for="tod">Day</output></div>
+              <input id="tod" type="range" min="0" max="100" step="1" value="0" aria-valuetext="Day">
+              <div class="studio__ticks" aria-hidden="true"><span>Day</span><span>Golden hour</span><span>Dusk</span><span>Night</span></div>
+            </div>
+            <div class="studio__grid">
+              <fieldset class="swatches"><legend>Siding <b data-pick="siding">Alabaster</b></legend>
+                <label title="Alabaster"><input type="radio" name="siding" value="alabaster" data-name="Alabaster" checked><span style="--c:#f2eee6"></span><i class="sr">Alabaster</i></label>
+                <label title="Greige"><input type="radio" name="siding" value="greige" data-name="Greige"><span style="--c:#d6ccbc"></span><i class="sr">Greige</i></label>
+                <label title="Sage"><input type="radio" name="siding" value="sage" data-name="Sage"><span style="--c:#a7b19e"></span><i class="sr">Sage</i></label>
+                <label title="Iron"><input type="radio" name="siding" value="iron" data-name="Iron"><span style="--c:#3a3e44"></span><i class="sr">Iron</i></label>
+              </fieldset>
+              <fieldset class="swatches"><legend>Roof <b data-pick="roof">Charcoal</b></legend>
+                <label title="Charcoal"><input type="radio" name="roof" value="charcoal" data-name="Charcoal" checked><span style="--c:#454b55"></span><i class="sr">Charcoal</i></label>
+                <label title="Black"><input type="radio" name="roof" value="black" data-name="Black"><span style="--c:#23262b"></span><i class="sr">Black</i></label>
+                <label title="Galvalume"><input type="radio" name="roof" value="galvalume" data-name="Galvalume"><span style="--c:#9aa1a8"></span><i class="sr">Galvalume</i></label>
+                <label title="Bronze"><input type="radio" name="roof" value="bronze" data-name="Bronze"><span style="--c:#5b4636"></span><i class="sr">Bronze</i></label>
+              </fieldset>
+              <fieldset class="swatches"><legend>Stone <b data-pick="masonry">Limestone</b></legend>
+                <label title="Limestone"><input type="radio" name="masonry" value="limestone" data-name="Limestone" checked><span style="--c:#cdbf9e"></span><i class="sr">Limestone</i></label>
+                <label title="Brick"><input type="radio" name="masonry" value="brick" data-name="Brick"><span style="--c:#9b5643"></span><i class="sr">Brick</i></label>
+                <label title="Slate"><input type="radio" name="masonry" value="slate" data-name="Slate"><span style="--c:#6c7077"></span><i class="sr">Slate</i></label>
+              </fieldset>
+              <fieldset class="swatches"><legend>Accents <b data-pick="accent">Cedar</b></legend>
+                <label title="Cedar"><input type="radio" name="accent" value="cedar" data-name="Cedar" checked><span style="--c:#a96f3d"></span><i class="sr">Cedar</i></label>
+                <label title="Black"><input type="radio" name="accent" value="black" data-name="Black"><span style="--c:#1f2329"></span><i class="sr">Black</i></label>
+                <label title="White oak"><input type="radio" name="accent" value="oak" data-name="White oak"><span style="--c:#c89a62"></span><i class="sr">White oak</i></label>
+              </fieldset>
+            </div>
+          </div>
+          <dl class="sheet__spec">
+            <div><dt>Home</dt><dd data-out="type">Custom home</dd></div>
+            <div><dt>Size</dt><dd data-out="size">2,800 sq ft</dd></div>
+            <div><dt>Rooms</dt><dd data-out="rooms">4 bed &middot; 3 bath</dd></div>
+            <div><dt>Location</dt><dd data-out="town">Georgetown, TX</dd></div>
+          </dl>
+          <div class="sheet__block" aria-hidden="true">
+            <img src="img/logo-white.webp" width="800" height="241" alt="" loading="lazy">
+            <span>Drawn for<b data-out="name">You</b></span>
+            <span>Sheet<b>A&ndash;1</b></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVIEWS: sliding marquee, pauses on hover/focus -->
+    <section class="reviews lazy" id="reviews" aria-labelledby="reviews-title">
+      <div class="head head--row">
+        <div>
+          <p class="kicker">Reviews &amp; testimonials</p>
+          <h2 id="reviews-title" class="title" data-split>Our clients <span>speak <em>for us.</em></span></h2>
+        </div>
+        <a class="link" href="https://g.page/r/CawZlbAqLc5HEAE/review" target="_blank" rel="noopener">Leave us a review <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+      </div>
+      <div class="marquee" tabindex="0" aria-label="Client reviews">
+        <div class="marquee__track">
+          <figure class="quote">
+            <blockquote>Aspen Homes has literally made my long time dream come true! There's many intricacies to building a house, and they made the process so simple. I appreciated their keen eye to detail.</blockquote>
+            <figcaption>Leshell Reeves <span>Homeowner</span></figcaption>
+          </figure>
+          <figure class="quote">
+            <blockquote>Alan and Dustin were extremely professional and were able answer all of our questions in a timely manner. We couldn't be more pleased with the outcome of our beautiful house.</blockquote>
+            <figcaption>The Mazurs <span>First-time custom home buyers</span></figcaption>
+          </figure>
+          <figure class="quote">
+            <blockquote>High quality work &amp; always attentive to our concerns. Have lived in our home for over two years and are very happy with our decision to use Aspen Homes.</blockquote>
+            <figcaption>Bob Biorkman <span>Google review</span></figcaption>
+          </figure>
+          <figure class="quote">
+            <blockquote>Aspen Homes was a pleasure to work with and provided an overall awesome experience. Their attention to detail and quality of work is second to none.</blockquote>
+            <figcaption>Chris Jones <span>Google review</span></figcaption>
+          </figure>
+          <figure class="quote">
+            <blockquote>Aspen completed a large remodel for us including outdoor covered patio, bathroom remodel, and upgrade entire home flooring. They were easy to work with and accommodated all our requests!</blockquote>
+            <figcaption>Tina Fields <span>Google review</span></figcaption>
+          </figure>
+          <figure class="quote">
+            <blockquote>As a home inspector, it is a breath of fresh air to find a home builder who not only cares about the quality of their work, but also their clients satisfaction during the construction process.</blockquote>
+            <figcaption>Constructiva Inspections <span>Google review</span></figcaption>
+          </figure>
+          <figure class="quote">
+            <blockquote>They were professional, trustworthy, and really easy to work with. We love our finished product!</blockquote>
+            <figcaption>Harry Fields <span>Google review</span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICE AREA: list of towns + a real map (Leaflet, loaded near the screen) over a drawing of the same lines -->
+    <section class="areas lazy" id="areas" aria-labelledby="areas-title">
+      <div class="areas__grid">
+        <div>
+          <div class="head">
+            <p class="kicker">Service Area</p>
+            <h2 id="areas-title" class="title" data-split>Building across <span>Central <em>Texas.</em></span></h2>
+          </div>
+          <ul class="towns">
+            <li><a href="#plan" data-town="Hutto" data-ll="30.5427,-97.5467"><span>Hutto</span><small>Home base</small></a></li>
+            <li><a href="#plan" data-town="Round Rock" data-ll="30.5083,-97.6789"><span>Round Rock</span><small>8 mi</small></a></li>
+            <li><a href="#plan" data-town="Taylor" data-ll="30.5708,-97.4092"><span>Taylor</span><small>8 mi</small></a></li>
+            <li><a href="#plan" data-town="Georgetown" data-ll="30.6333,-97.6780"><span>Georgetown</span><small>10 mi</small></a></li>
+            <li><a href="#plan" data-town="Austin" data-ll="30.2672,-97.7431"><span>Austin</span><small>22 mi</small></a></li>
+            <li><a href="#plan" data-town="Liberty Hill" data-ll="30.6649,-97.9225"><span>Liberty Hill</span><small>24 mi</small></a></li>
+            <li><a href="#plan" data-town="Spicewood" data-ll="30.4752,-98.1567"><span>Spicewood</span><small>37 mi</small></a></li>
+            <li><a href="#plan" data-town="Marble Falls" data-ll="30.5783,-98.2750"><span>Marble Falls</span><small>43 mi</small></a></li>
+            <li><a href="#plan" data-town="Horseshoe Bay" data-ll="30.5441,-98.3739"><span>Horseshoe Bay</span><small>49 mi</small></a></li>
+          </ul>
+        </div>
+        <figure class="map">
+          <div class="map__box">
+            <svg id="mapSvg" viewBox="0 0 640 360" aria-hidden="true"></svg>
+            <div class="map__real" role="region" aria-label="Map of the service area: lines from Hutto to each town, with the miles"></div>
+          </div>
+          <figcaption>Straight-line miles from Hutto. Rings at 15, 30 and 45 miles. Drag the map, or zoom with + and &minus;.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta" aria-labelledby="cta-title">
+      <div class="cta__glow" aria-hidden="true"></div>
+      <p class="kicker kicker--light">Can't find the perfect house?</p>
+      <h2 id="cta-title" data-split>Let's <em>build</em> it.</h2>
+      <p>Arrange for custom home construction services in Hutto, Round Rock, Georgetown and the greater Central Texas area.</p>
+      <div class="cta__row">
+        <a class="btn btn--light" href="tel:5128485647">(512) 848-5647</a>
+        <a class="btn btn--ghost" href="#plan">Plan your home</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="foot__grid">
+      <div class="foot__about">
+        <img src="img/logo-white.webp" width="800" height="241" alt="Aspen Homes" loading="lazy">
+        <p>When you're ready to build your high-end home, Aspen Homes is here to provide exceptional quality &amp; service. We also build farmhouses &amp; barndominiums.</p>
+      </div>
+      <div>
+        <h2>Construction Services</h2>
+        <ul>
+          <li><a href="custom-homes.html#custom">Custom Homes</a></li>
+          <li><a href="custom-homes.html#farmhouse">Luxury Farmhouses</a></li>
+          <li><a href="custom-homes.html#barndominium">Barndominiums</a></li>
+          <li><a href="custom-homes.html#remodeling">Bathroom Remodels</a></li>
+          <li><a href="custom-homes.html#remodeling">Kitchen Remodels</a></li>
+          <li><a href="custom-homes.html#remodeling">Porch Additions</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Get In Touch</h2>
+        <ul>
+          <li>Hutto, TX 78634</li>
+          <li><a href="tel:5128485647">(512) 848-5647</a></li>
+          <li><a href="tel:5128451844">(512) 845-1844</a></li>
+          <li><a href="mailto:alan@aspenhomesoftx.com">alan@aspenhomesoftx.com</a></li>
+          <li><a href="mailto:dusty@aspenhomesoftx.com">dusty@aspenhomesoftx.com</a></li>
+          <li><a href="mailto:andrew@aspenhomesoftx.com">andrew@aspenhomesoftx.com</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Hours</h2>
+        <ul>
+          <li>Mon&ndash;Fri: 8:00 AM &ndash; 5:00 PM</li>
+          <li>Sat: 10:00 AM &ndash; 3:30 PM</li>
+          <li>Sun: 10:00 AM &ndash; 3:30 PM</li>
+        </ul>
+        <h2>Follow Us</h2>
+        <p class="social">
+          <a href="https://www.facebook.com/aspenhomesoftx/" aria-label="Facebook" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3a4 4 0 00-4 4v2H8v4h2v8h4v-8h3l1-4h-4V8z"/></svg></a>
+          <a href="https://www.instagram.com/aspenhomesoftexas/" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3.6" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="16.8" cy="7.2" r="1.1"/></svg></a>
+          <a class="social__wa" href="https://wa.me/15128485647?text=Hi%20Aspen%20Homes!%20I%27d%20like%20to%20talk%20about%20building%20a%20home." aria-label="WhatsApp" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg></a>
+          <a href="https://g.page/r/CawZlbAqLc5HEAE/review" aria-label="Leave us a Google review" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 12.2c0-.6-.1-1.2-.2-1.8H12v3.4h4.8a4.1 4.1 0 01-1.8 2.7v2.2h2.9c1.7-1.6 2.6-3.8 2.6-6.5zM12 20.5c2.4 0 4.4-.8 5.9-2.1L15 16.2c-.8.5-1.8.9-3 .9-2.3 0-4.3-1.6-5-3.7H4v2.3a8.5 8.5 0 008 4.8zM7 13.4a5.1 5.1 0 010-3.3V7.8H4a8.5 8.5 0 000 7.7zM12 6.9c1.3 0 2.5.5 3.4 1.3l2.5-2.5A8.5 8.5 0 004 7.8l3 2.3c.7-2.1 2.7-3.2 5-3.2z"/></svg></a>
+        </p>
+      </div>
+    </div>
+    <p class="foot__word" aria-hidden="true"><span>Aspen Homes</span></p>
+    <div class="foot__bar">
+      <p>Custom Home Builder &middot; Hutto, Texas</p>
+      <p>&copy; Aspen Homes. All Rights Reserved.</p>
+      <p class="foot__concept">Website concept &middot; the official site is <a href="https://aspenhomesoftx.com/">aspenhomesoftx.com</a></p>
+    </div>
+  </footer>
+
+  <!-- WhatsApp, bottom left -->
+  <a class="fab fab--wa" href="https://wa.me/15128485647?text=Hi%20Aspen%20Homes!%20I%27d%20like%20to%20talk%20about%20building%20a%20home." target="_blank" rel="noopener" aria-label="Message Aspen Homes on WhatsApp">
+    <svg aria-hidden="true"><use href="#i-wa"/></svg>
+  </a>
+
+  <!-- Aspen assistant, bottom right: a small chat that answers from Aspen's own info (chat.js) -->
+  <button class="fab fab--ai" type="button" aria-expanded="false" aria-controls="chat" aria-label="Open the Aspen assistant">
+    <img src="img/logo-mark.webp" width="241" height="241" alt="">
+    <svg class="fab__x" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    <span class="fab__dot" aria-hidden="true"></span>
+  </button>
+
+  <section class="chat" id="chat" aria-labelledby="chatTitle" hidden>
+    <header class="chat__head">
+      <img class="chat__avatar" src="img/logo-mark.webp" width="241" height="241" alt="">
+      <div>
+        <h2 id="chatTitle">Aspen Assistant</h2>
+        <p class="chat__status">Online &middot; replies instantly</p>
+      </div>
+      <button class="chat__close" type="button" aria-label="Close the chat"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </header>
+    <div class="chat__log" role="log" aria-live="polite" data-native-scroll>
+      <div class="msg msg--assistant"><p>Hi! How can we help with your home?</p></div>
+      <div class="chat__chips">
+        <button type="button" data-ask="How does build-on-your-lot work?">Build on my lot</button>
+        <button type="button" data-ask="Which towns do you build in?">Areas we serve</button>
+        <button type="button" data-ask="How much does a custom home cost?">Pricing</button>
+        <button type="button" data-ask="I'd like to talk to a person">Talk to a person</button>
+      </div>
+    </div>
+    <form class="chat__form" autocomplete="off">
+      <label class="sr" for="chatInput">Your message</label>
+      <input id="chatInput" type="text" maxlength="500" placeholder="Type a message&hellip;" enterkeyhint="send">
+      <button type="submit" aria-label="Send message"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    </form>
+  </section>
+
+  <!-- Photo viewer for the gallery -->
+  <dialog class="lb" id="lightbox" aria-label="Photo viewer">
+    <div class="lb__stage">
+      <figure class="lb__fig"><img class="lb__img" alt=""><figcaption class="lb__cap"><b></b><span></span></figcaption></figure>
+    </div>
+    <p class="lb__count" aria-live="polite"></p>
+    <button class="lb__btn lb__close" type="button" aria-label="Close photo viewer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <button class="lb__btn lb__prev" type="button" aria-label="Previous photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+    <button class="lb__btn lb__next" type="button" aria-label="Next photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+    <div class="lb__thumbs"></div>
+  </dialog>
+
+  <!-- Home Brief: a one-page summary of the planner, to save as PDF or send (features.js fills it) -->
+  <dialog class="bd" id="briefDlg" aria-labelledby="briefTitle">
+    <div class="bd__bar">
+      <p class="bd__title" id="briefTitle">Your Home Brief</p>
+      <div class="bd__actions">
+        <button type="button" class="btn btn--brass" data-brief-pdf>Save as PDF</button>
+        <button type="button" class="btn btn--line" data-brief-email>Email to Aspen</button>
+        <button type="button" class="bd__icon bd__icon--wa" data-brief-wa aria-label="Send the brief on WhatsApp"><svg aria-hidden="true"><use href="#i-wa"/></svg></button>
+        <button type="button" class="bd__icon" data-brief-close aria-label="Close the brief"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+    </div>
+    <div class="bd__scroll" data-native-scroll><article class="brief" id="brief"></article></div>
+  </dialog>
+
+  <script src="main.js" defer></script>
+  <script src="motion.js" defer></script>
+  <script src="features.js" defer></script>
+  <script src="chat.js" defer></script>
+</body>
+</html>

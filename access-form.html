@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Access request</title>
+</head>
+<body>
+  <!-- Netlify Forms reads this form when the site is published. The "Request access" page posts to it so the
+       owner gets an email for every request. Nobody sees this page: the access gate sits in front of it. -->
+  <form name="access-request" method="POST" data-netlify="true" netlify-honeypot="website">
+    <input name="name">
+    <input name="email" type="email">
+    <input name="company">
+    <textarea name="note"></textarea>
+    <input name="review">
+    <input name="website">
+  </form>
+</body>
+</html>

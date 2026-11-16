@@ -1,0 +1,10 @@
+node_modules/
+.netlify/
+.deploy/
+.vercel/
+netlify.toml
+ACCESS-ADMIN-KEY.txt
+.env
+.env.*
+__pycache__/
+*.pyc

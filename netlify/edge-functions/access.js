@@ -342,7 +342,7 @@ form button{width:100%;margin-top:20px}
     <p id="noText">This preview isn't open to you right now. If you think that's a mistake, contact the person who shared the link.</p>
   </section>
 
-  <p class="foot">&copy; ${OWNER}. Design and code are not licensed for reuse.</p>
+  <p class="foot">This demo preview belongs to the owner who created it.</p>
 </main>
 <script>
 (function () {
